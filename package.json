@@ -1,0 +1,7 @@
+{
+  "name": "2048ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "kekoyana <kekoyana0@gmail.com>",
+  "license": "MIT"
+}
