@@ -8,7 +8,9 @@ export default class Board{
           [0, 0, 0, 0],
           [0, 0, 0, 0]
       ];
-      this.add_right_tile();
+      for(let i = 0; i < 2; i++) {
+          this.add_right_tile();
+      }
   }
 
   public add_right_tile(): boolean {
