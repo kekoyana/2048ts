@@ -5,6 +5,7 @@
   "author": "kekoyana <kekoyana0@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^14.14.20",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.2.0",
     "ts-node": "^9.1.0",
