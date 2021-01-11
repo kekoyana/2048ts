@@ -1,15 +1,4 @@
-class Board{
-  tiles: number[][];
-
-  constructor() {
-      this.tiles = [
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0]
-      ];
-  }
-}
+import Board from './board';
 
 const board = new Board();
 console.log(board);
