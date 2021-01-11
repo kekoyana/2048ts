@@ -11,7 +11,7 @@ export default class Board{
       for(let i = 0; i < 2; i++) {
           this.add_right_tile();
       }
-      this.tiles = this.tile_move(this.tiles);
+      this.move_left();
   }
 
   public to_s(): string {
@@ -20,6 +20,13 @@ export default class Board{
           return tile_line.join(' | ');
       }
       ).join('\n');
+  }
+
+  public move_left(): void{
+      const tmp_tiles = this.tiles.join(',');
+      this.tiles = this.tile_move(this.tiles);
+      if(this.tiles.join(',') == tmp_tiles) return;
+      this.add_right_tile();
   }
 
   private add_right_tile(): boolean {
