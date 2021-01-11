@@ -11,6 +11,7 @@ export default class Board{
       for(let i = 0; i < 2; i++) {
           this.add_right_tile();
       }
+      this.tiles = this.tile_move(this.tiles);
   }
 
   public to_s(): string {
@@ -21,7 +22,7 @@ export default class Board{
       ).join('\n');
   }
 
-  public add_right_tile(): boolean {
+  private add_right_tile(): boolean {
       const tile_num: number = Math.random() < 0.5 ? 2 : 4;
       const shuffle = [0, 1, 2, 3].sort(() => { return Math.random() - 0.5; });
       for (const i of shuffle) {
@@ -31,5 +32,28 @@ export default class Board{
           }
       }
       return false;
+  }
+
+  private tile_move(board_tiles: number[][]): number[][] {
+      return board_tiles.map(tiles => {
+          let tmp_tiles = tiles.filter(i => i != 0);
+          tmp_tiles = this.tile_lines_sum(tmp_tiles);
+          tmp_tiles = tmp_tiles.filter(i => i != 0);
+          while(tmp_tiles.length < 4){
+              tmp_tiles.push(0);
+          }
+          return tmp_tiles;
+      });
+  }
+
+  private tile_lines_sum(tile_lines: number[]): number[] {
+      for(let i=0;i<3;i++){
+          if(tile_lines[i] == undefined || tile_lines[i] == 0) continue;
+          if(tile_lines[i] == tile_lines[i + 1]){
+              tile_lines[i] *= 2;
+              tile_lines[i + 1] = 0;
+          }
+      }
+      return tile_lines;
   }
 }
