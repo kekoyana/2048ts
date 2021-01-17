@@ -1,15 +1,15 @@
-class Board{
-  tiles: number[][];
+import Board from './board';
+import readline from 'readline';
 
-  constructor() {
-      this.tiles = [
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0]
-      ];
-  }
-}
+readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+/* eslint-disable @typescript-eslint/no-explicit-any*/
+readline.question('What is your name? ', (answer: any) => {
+  console.log(`Hello, ${answer}!`);
+  readline.close();
+});
 
 const board = new Board();
-console.log(board);
+console.log(board.to_s());
