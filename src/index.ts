@@ -1,34 +1,36 @@
 import Board from './board';
-import readline from 'readline';
 import { VoidExpression } from 'typescript';
-
-let rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const rls = require('readline-sync');
 
 function game(){
   const input: string = wait_input();
   switch (input) {
     case 'q':
       board.move_left();
+      break;
+    case 'w':
+      board.move_up();
+      break;
+    case 'e':
+      board.move_down();
+      break;
+    case 'r':
+      board.move_right();
+      break;
   }
   print();
 }
 
 function wait_input(): string{
-  rl.question('?', (answer: string) => {
-    rl.close();
-    return answer.split('')[0];
-  });
-  return '';
+  const input = rls.question('').split('')[0]
+  return input;
 }
 
 function print(): void {
-  process.stdout.write("\e[H\e[2J");
-//  process.stdout.write(board.to_s);
+  console.clear();
+  console.log(board.to_s());
 }
 
-let board = new Board();
+var board = new Board();
 print();
-game();
+while (true) { game() };

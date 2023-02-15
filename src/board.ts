@@ -15,18 +15,39 @@ export default class Board{
   }
 
   public to_s(): string {
-    //for (let tile_line of this.titles) {
     return this.tiles.map(tile_line => {
       return tile_line.join(' | ');
     }
     ).join('\n');
   }
 
-  public move_left(): void{
+  public move_left(): void {
     const tmp_tiles = this.tiles.join(',');
     this.tiles = this.tile_move(this.tiles);
     if(this.tiles.join(',') == tmp_tiles) return;
     this.add_right_tile();
+  }
+
+  public move_up(): void {
+    this.rev_transpose();
+    this.rev_transpose();
+    this.rev_transpose();
+    this.move_left();
+    this.rev_transpose();
+  }
+
+  public move_down(): void {
+    this.rev_transpose();
+    this.move_left();
+    this.rev_transpose();
+    this.rev_transpose();
+    this.rev_transpose();
+  }
+
+  public move_right(): void {
+    this.tiles.map(row => row = row.reverse());
+    this.move_left();
+    this.tiles.map(row => row = row.reverse());
   }
 
   private add_right_tile(): boolean {
@@ -43,7 +64,7 @@ export default class Board{
 
   private tile_move(board_tiles: number[][]): number[][] {
     return board_tiles.map(tiles => {
-      let tmp_tiles = tiles.filter(i => i != 0);
+      var tmp_tiles = tiles.filter(i => i != 0);
       tmp_tiles = this.tile_lines_sum(tmp_tiles);
       tmp_tiles = tmp_tiles.filter(i => i != 0);
       while(tmp_tiles.length < 4){
@@ -62,5 +83,9 @@ export default class Board{
       }
     }
     return tile_lines;
+  }
+
+  private rev_transpose(): void {
+    this.tiles = this.tiles[0].map((_, i) => this.tiles.map(row => row[i]).reverse());
   }
 }
